@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class Skill(
     val skillName: String,
-    val timeSpent: Int,
+    val timeSpent: Double,
     val finalGoal: String,
     @PrimaryKey(autoGenerate = true) val skillId: Long? = null
 )

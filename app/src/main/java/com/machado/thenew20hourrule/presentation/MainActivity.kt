@@ -1,7 +1,8 @@
-package com.machado.thenew20hourrule
+package com.machado.thenew20hourrule.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.machado.thenew20hourrule.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

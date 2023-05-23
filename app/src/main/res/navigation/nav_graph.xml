@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/skillListFragment">
+
+    <fragment
+        android:id="@+id/skillListFragment"
+        android:name="com.machado.thenew20hourrule.presentation.skill_list_screen.SkillListFragment"
+        android:label="fragment_skill_list"
+        tools:layout="@layout/fragment_skill_list">
+        <action
+            android:id="@+id/action_skillListFragment_to_skillDetailFragment"
+            app:destination="@id/skillDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/skillDetailFragment"
+        android:name="com.machado.thenew20hourrule.presentation.skill_detail_screen.SkillDetailFragment"
+        android:label="fragment_skill_detail"
+        tools:layout="@layout/fragment_skill_detail" >
+        <argument
+            android:name="skillId"
+            app:argType="long" />
+    </fragment>
+</navigation>

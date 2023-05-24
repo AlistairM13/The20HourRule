@@ -18,9 +18,9 @@
         android:id="@+id/skillDetailFragment"
         android:name="com.machado.thenew20hourrule.presentation.skill_detail_screen.SkillDetailFragment"
         android:label="fragment_skill_detail"
-        tools:layout="@layout/fragment_skill_detail" >
+        tools:layout="@layout/fragment_skill_detail">
         <argument
-            android:name="skillId"
-            app:argType="long" />
+            android:name="skill"
+            app:argType="com.machado.thenew20hourrule.data.local.entities.Skill" />
     </fragment>
 </navigation>

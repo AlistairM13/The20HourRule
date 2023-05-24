@@ -7,10 +7,10 @@
     android:padding="8dp">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilSkillName"
+        android:id="@+id/tilSessionObjective"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/et_new_skill_name_label"
+        android:hint="@string/et_dialog_box_session_objective"
         app:counterEnabled="true"
         app:counterMaxLength="30"
         app:errorEnabled="true"
@@ -19,29 +19,27 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etDialogBoxSkillName"
+            android:id="@+id/etDialogBoxSessionObjective"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:maxLength="30" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_input_layout"
+        android:id="@+id/tilSessionDuration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/et_new_skill_goal_label"
-        app:counterEnabled="true"
-        app:counterMaxLength="30"
+        android:hint="@string/et_dialog_box_session_duration"
         app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="@id/tilSkillName"
-        app:layout_constraintStart_toStartOf="@id/tilSkillName"
-        app:layout_constraintTop_toBottomOf="@id/tilSkillName">
+        app:layout_constraintEnd_toEndOf="@id/tilSessionObjective"
+        app:layout_constraintStart_toStartOf="@id/tilSessionObjective"
+        app:layout_constraintTop_toBottomOf="@id/tilSessionObjective">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etDialogBoxSkillGoal"
+            android:id="@+id/etDialogBoxSessionDuration"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:maxLength="30" />
+            android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,4 +10,11 @@
     <string name="tv_empty_list">No Skills Found, start working on one</string>
     <string name="et_new_skill_name_label">Skill Name</string>
     <string name="et_new_skill_goal_label">Final Goal</string>
+    <string name="et_dialog_box_session_duration">How long will the session be? (in min)</string>
+    <string name="et_dialog_box_session_objective">What will you do this session?</string>
+    <string name="session_objective_not_set">Objective: Not Set</string>
+    <string name="session_duration_not_set">Duration: Not Set</string>
+    <string name="session_objective">Objective: %s</string>
+    <string name="session_duration">Duration: %d (min)</string>
+    <string name="menu_item_history">History</string>
 </resources>

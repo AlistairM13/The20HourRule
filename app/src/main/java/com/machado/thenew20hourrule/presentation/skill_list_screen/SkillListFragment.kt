@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -60,6 +61,11 @@ class SkillListFragment : Fragment() {
                     viewModel.undoDelete()
                 }
                 .show()
+        }
+        skillListAdapter.setOnSkillItemClickListener {
+            val action =
+                SkillListFragmentDirections.actionSkillListFragmentToSkillDetailFragment(it)
+            findNavController().navigate(action)
         }
 
         binding.fabAddNewSkill.setOnClickListener {

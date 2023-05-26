@@ -102,7 +102,7 @@ class SkillListFragment : Fragment() {
                             "Skill name cannot be empty"
                         if (skillGoal.text.isNullOrBlank()) skillGoal.error =
                             "Have a goal my friend, it will help"
-                        if (!skillGoal.text.isNullOrBlank() && !skillGoal.text.isNullOrBlank()) {
+                        if (!skillGoal.text.isNullOrBlank() && !skillName.text.isNullOrBlank()) {
                             val updatedOrNewSkill = skill?.copy(
                                 skillName = skillName.text.toString(),
                                 finalGoal = skillGoal.text.toString()

@@ -1,5 +1,6 @@
 package com.machado.thenew20hourrule.presentation.skill_detail_screen
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.machado.thenew20hourrule.R
 import com.machado.thenew20hourrule.data.local.entities.Session
 import com.machado.thenew20hourrule.data.local.entities.Skill
 import com.machado.thenew20hourrule.databinding.FragmentSkillDetailBinding
+import com.machado.thenew20hourrule.presentation.skill_list_screen.SkillListViewModel
 import com.machado.thenew20hourrule.util.TimeHelper
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -122,6 +124,7 @@ class SkillDetailFragment : Fragment() {
     }
 
     private fun navigateBackToSkillListScreen() {
+        requireActivity().getSharedPreferences(SkillListViewModel.SHARED_PREFERENCE, Context.MODE_PRIVATE).edit().clear().apply()
         findNavController().navigate(SkillDetailFragmentDirections.actionSkillDetailFragmentToSkillListFragment())
     }
 

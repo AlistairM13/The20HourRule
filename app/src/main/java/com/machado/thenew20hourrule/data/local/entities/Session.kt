@@ -20,7 +20,7 @@ import java.text.DateFormat
 @Parcelize
 data class Session(
     val objective: String,
-    val sessionDurationInMin: Double,
+    val sessionDurationInMin: Float,
     val skillId: Long,
     val createdOnMillis: Long? = null,
     @PrimaryKey(autoGenerate = true) val sessionId: Long? = null

@@ -153,7 +153,7 @@ class SkillDetailFragment : Fragment() {
 
                             val newSession = Session(
                                 objective = sessionObjective.text.toString(),
-                                sessionDurationInMin = sessionDuration.text.toString().toDouble(),
+                                sessionDurationInMin = sessionDuration.text.toString().toFloat(),
                                 skillId = skill.skillId!!
                             )
                             // Set datetime when done

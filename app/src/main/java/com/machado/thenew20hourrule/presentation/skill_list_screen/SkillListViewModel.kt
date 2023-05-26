@@ -44,12 +44,12 @@ class SkillListViewModel @Inject constructor(
             val sharedPref =
                 application.getSharedPreferences(SHARED_PREFERENCE, Context.MODE_PRIVATE)
 
-            if (sharedPref.getString(SHARED_PREF_SKILL_NAME, "") != "") {
+            if (sharedPref.getLong(SHARED_PREF_SKILL_ID, -1L) != -1L) {
                 val skillFromSharedPref = Skill(
                     skillName = sharedPref.getString(SHARED_PREF_SKILL_NAME, "")!!,
                     timeSpent = sharedPref.getFloat(SHARED_PREF_SKILL_TIME_SPENT, 0f).toDouble(),
                     finalGoal = sharedPref.getString(SHARED_PREF_SKILL_GOAL, "")!!,
-                    skillId = sharedPref.getLong(SHARED_PREF_SKILL_ID, 0)
+                    skillId = sharedPref.getLong(SHARED_PREF_SKILL_ID, -1L)
                 )
                 skill = skillFromSharedPref
             } else {
@@ -71,11 +71,11 @@ class SkillListViewModel @Inject constructor(
     }
 
     companion object {
-        const val SKILL_STATE = "SKILL_STATE"
-        const val SHARED_PREF_SKILL_ID = "SHARED_PREF_SKILL_ID"
-        const val SHARED_PREF_SKILL_NAME = "SHARED_PREF_SKILL_NAME"
-        const val SHARED_PREF_SKILL_TIME_SPENT = "SHARED_PREF_SKILL_TIME_SPENT"
-        const val SHARED_PREF_SKILL_GOAL = "SHARED_PREF_SKILL_GOAL"
         const val SHARED_PREFERENCE = "SHARE_PREFERENCE"
+        private const val SKILL_STATE = "SKILL_STATE"
+        private const val SHARED_PREF_SKILL_ID = "SHARED_PREF_SKILL_ID"
+        private const val SHARED_PREF_SKILL_NAME = "SHARED_PREF_SKILL_NAME"
+        private const val SHARED_PREF_SKILL_TIME_SPENT = "SHARED_PREF_SKILL_TIME_SPENT"
+        private const val SHARED_PREF_SKILL_GOAL = "SHARED_PREF_SKILL_GOAL"
     }
 }

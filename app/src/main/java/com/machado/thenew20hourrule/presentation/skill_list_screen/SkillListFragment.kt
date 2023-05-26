@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -16,14 +17,12 @@ import com.machado.thenew20hourrule.R
 import com.machado.thenew20hourrule.data.local.entities.Skill
 import com.machado.thenew20hourrule.databinding.FragmentSkillListBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SkillListFragment : Fragment() {
     private lateinit var binding: FragmentSkillListBinding
 
-    @Inject
-    lateinit var viewModel: SkillListViewModel
+    private val viewModel: SkillListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +36,11 @@ class SkillListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val skillListAdapter = SkillListAdapter()
+
+        Log.i("MYTAG", "${viewModel.skill ?: "nooo"} fragment")
+        if (viewModel.skill != null) {
+            navigateToSkillDetailsScreen(viewModel.skill!!)
+        }
 
         binding.rvSkillList.apply {
             adapter = skillListAdapter
@@ -62,15 +66,21 @@ class SkillListFragment : Fragment() {
                 }
                 .show()
         }
+
         skillListAdapter.setOnSkillItemClickListener {
-            val action =
-                SkillListFragmentDirections.actionSkillListFragmentToSkillDetailFragment(it)
-            findNavController().navigate(action)
+            viewModel.onSkillItemClicked(it)
+            navigateToSkillDetailsScreen(it)
         }
 
         binding.fabAddNewSkill.setOnClickListener {
             createOrEditProjectDialog(null)
         }
+    }
+
+    private fun navigateToSkillDetailsScreen(skill: Skill) {
+        val action =
+            SkillListFragmentDirections.actionSkillListFragmentToSkillDetailFragment(skill)
+        findNavController().navigate(action)
     }
 
     private fun createOrEditProjectDialog(skill: Skill?) {

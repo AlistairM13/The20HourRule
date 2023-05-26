@@ -1,13 +1,17 @@
 package com.machado.thenew20hourrule.presentation.skill_list_screen
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.machado.thenew20hourrule.data.local.entities.Skill
 import com.machado.thenew20hourrule.domain.repository.SkillRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class SkillListViewModel @Inject constructor(
+    val state: SavedStateHandle,
     val repository: SkillRepository
 ) : ViewModel() {
 
@@ -26,5 +30,16 @@ class SkillListViewModel @Inject constructor(
         deletedSkill?.let { insertSkill(it) }
         deletedSkill = null
     }
+
+    var skill: Skill? = null
+
+    init {
+        skill = state.get<Skill>("skill")
+    }
+
+    fun onSkillItemClicked(selectedSkill: Skill) {
+        state.set("skill", selectedSkill)
+    }
+
 
 }

@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -20,15 +21,13 @@ import com.machado.thenew20hourrule.data.local.entities.Skill
 import com.machado.thenew20hourrule.databinding.FragmentSkillDetailBinding
 import com.machado.thenew20hourrule.util.TimeHelper
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SkillDetailFragment : Fragment() {
     private lateinit var binding: FragmentSkillDetailBinding
     private lateinit var onBackPressedCallback: OnBackPressedCallback
 
-    @Inject
-    lateinit var viewModel: SkillDetailsViewModel
+    private val viewModel: SkillDetailsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,8 +41,6 @@ class SkillDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val args: SkillDetailFragmentArgs by navArgs()
         val skill = args.skill
-
-        createSessionDialog(null, skill)
 
         binding.toolBar.apply {
             title = skill.skillName
@@ -66,11 +63,12 @@ class SkillDetailFragment : Fragment() {
         }
 
         viewModel.session.observe(viewLifecycleOwner) { session ->
-            if(session != null) {
+            if (session != null) {
                 binding.apply {
-                    tvSessionObjective.text = getString(R.string.session_objective, session.objective)
+                    tvSessionObjective.text =
+                        getString(R.string.session_objective, session.objective)
                     tvSessionDuration.text =
-                        getString(R.string.session_duration, session.sessionDuration.toInt())
+                        getString(R.string.session_duration, session.sessionDurationInMin.toInt())
                 }
             } else {
                 binding.apply {
@@ -82,15 +80,15 @@ class SkillDetailFragment : Fragment() {
 
         viewModel.isSessionStarted.observe(viewLifecycleOwner) { isStarted ->
             if (isStarted) {
-                binding.btnStartOrStop.text = "Stop"
+                binding.btnStartOrStop.text = getString(R.string.btn_text_stop)
             } else {
-                binding.btnStartOrStop.text = "Start"
+                binding.btnStartOrStop.text = getString(R.string.btn_text_start)
             }
         }
 
         binding.btnStartOrStop.setOnClickListener {
             if (viewModel.session.value == null) {
-                createSessionDialog(null, skill)
+                createOrEditSessionDialog(null, skill)
                 return@setOnClickListener
             }
             viewModel.startOrStopSession()
@@ -103,7 +101,7 @@ class SkillDetailFragment : Fragment() {
         onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (viewModel.currentTimeInSeconds.value == 0L) {
-                    findNavController().navigateUp()
+                    navigateBackToSkillListScreen()
                 } else {
                     saveSessionDialog(skill)
                 }
@@ -121,8 +119,12 @@ class SkillDetailFragment : Fragment() {
         onBackPressedCallback.remove()
     }
 
+    private fun navigateBackToSkillListScreen() {
+        findNavController().navigate(SkillDetailFragmentDirections.actionSkillDetailFragmentToSkillListFragment())
+    }
 
-    private fun createSessionDialog(session: Session?, skill: Skill) {
+
+    private fun createOrEditSessionDialog(session: Session?, skill: Skill) {
         val customDialogLayout =
             layoutInflater.inflate(R.layout.create_session_dialog, null)
 
@@ -146,7 +148,7 @@ class SkillDetailFragment : Fragment() {
 
                             val newSession = Session(
                                 objective = sessionObjective.text.toString(),
-                                sessionDuration = sessionDuration.text.toString().toDouble(),
+                                sessionDurationInMin = sessionDuration.text.toString().toDouble(),
                                 skillId = skill.skillId!!
                             )
                             // Set datetime when done
@@ -159,7 +161,7 @@ class SkillDetailFragment : Fragment() {
                 if (session != null) {
                     setTitle("Edit Session")
                     sessionObjective.setText(session.objective)
-                    sessionDuration.setText(session.sessionDuration.toString())
+                    sessionDuration.setText(session.sessionDurationInMin.toString())
                     setNegativeButton("Cancel") { _, _ -> }
                 }
             }.show()
@@ -173,13 +175,13 @@ class SkillDetailFragment : Fragment() {
             setPositiveButton("Save session") { _, _ ->
                 Log.i("MYTAG", "saved")
                 viewModel.updateSession(skill)
-                findNavController().navigateUp()
+                navigateBackToSkillListScreen()
             }
-            if(viewModel.currentTimeInSeconds.value != 0L && viewModel.isSessionFinished.value == false){
+            if (viewModel.currentTimeInSeconds.value != 0L && viewModel.isSessionFinished.value == false) {
                 setTitle("Save your work?")
                 setMessage("Progress will be lost otherwise")
-                setNegativeButton("Exit without saving"){_,_->
-                    findNavController().navigateUp()
+                setNegativeButton("Exit without saving") { _, _ ->
+                    navigateBackToSkillListScreen()
                 }
             }
             create()

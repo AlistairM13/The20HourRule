@@ -37,7 +37,6 @@ class SkillListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val skillListAdapter = SkillListAdapter()
 
-        Log.i("MYTAG", "${viewModel.skill ?: "nooo"} fragment")
         if (viewModel.skill != null) {
             navigateToSkillDetailsScreen(viewModel.skill!!)
         }

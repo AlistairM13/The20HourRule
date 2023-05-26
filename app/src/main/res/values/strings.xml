@@ -17,4 +17,6 @@
     <string name="session_objective">Objective: %s</string>
     <string name="session_duration">Duration: %d (min)</string>
     <string name="menu_item_history">History</string>
+    <string name="btn_text_stop">Stop</string>
+    <string name="btn_text_start">Start</string>
 </resources>

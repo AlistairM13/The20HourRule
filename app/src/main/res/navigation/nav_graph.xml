@@ -22,5 +22,8 @@
         <argument
             android:name="skill"
             app:argType="com.machado.thenew20hourrule.data.local.entities.Skill" />
+        <action
+            android:id="@+id/action_skillDetailFragment_to_skillListFragment"
+            app:destination="@id/skillListFragment" />
     </fragment>
 </navigation>

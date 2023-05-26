@@ -2,11 +2,9 @@ package com.machado.thenew20hourrule.presentation.history_screen
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -42,11 +40,19 @@ class HistoryFragment : Fragment() {
             setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.miSortByDuration -> {
-                        Toast.makeText(context, "Sort by duration", Toast.LENGTH_SHORT).show()
+                        viewModel.orderByDuration(false)
                     }
 
-                    R.id.miSortByRecent -> {
-                        Toast.makeText(context, "Sort by duration", Toast.LENGTH_SHORT).show()
+                    R.id.miSortByDurationReversed -> {
+                        viewModel.orderByDuration(true)
+                    }
+
+                    R.id.miSortByDate -> {
+                        viewModel.orderByDate(false)
+                    }
+
+                    R.id.miSortByDateReversed -> {
+                        viewModel.orderByDate(true)
                     }
                 }
                 true
@@ -63,7 +69,6 @@ class HistoryFragment : Fragment() {
         }
 
         viewModel.allSessions.observe(viewLifecycleOwner) {
-            Log.i("MYTAG", "$it")
             it?.let { skillWithSessions ->
                 if (skillWithSessions.sessions.isEmpty()) {
                     binding.apply {

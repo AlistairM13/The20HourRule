@@ -44,8 +44,11 @@ class HistoryListAdapter : RecyclerView.Adapter<HistoryListAdapter.SkillViewHold
             binding.apply {
                 tvHistorySessionObjective.text = session.objective
                 tvHistorySessionDuration.text =
-                    root.resources.getString(R.string.tv_session_time_spent, session.sessionDurationInMin)
-                tvHistorySessionDateTime.text = session.sessionDateTime
+                    root.resources.getString(
+                        R.string.tv_session_time_spent,
+                        session.sessionDurationInMin
+                    )
+                tvHistorySessionDateTime.text = session.createdDateFormatted
 
                 if (session.sessionDurationInMin > 60) {
                     binding.root.setCardBackgroundColor(

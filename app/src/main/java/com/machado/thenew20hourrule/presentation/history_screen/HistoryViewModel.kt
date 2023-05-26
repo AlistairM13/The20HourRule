@@ -23,4 +23,28 @@ class HistoryViewModel @Inject constructor(
         val sessions = repository.getSkillWithSessions(skill.skillId!!)
         _allSessions.postValue(sessions)
     }
+
+    fun orderByDuration(isReversed: Boolean) {
+        _allSessions.value?.let { skillWithSessions ->
+            var orderedByDuration = skillWithSessions.sessions.sortedBy { it.sessionDurationInMin }
+            if (isReversed) orderedByDuration = orderedByDuration.reversed()
+            _allSessions.postValue(
+                skillWithSessions.copy(
+                    sessions = orderedByDuration
+                )
+            )
+        }
+    }
+
+    fun orderByDate(isReversed: Boolean) {
+        _allSessions.value?.let { skillWithSessions ->
+            var orderedByDate = skillWithSessions.sessions.sortedBy { it.createdOnMillis }
+            if (isReversed) orderedByDate = orderedByDate.reversed()
+            _allSessions.postValue(
+                skillWithSessions.copy(
+                    sessions = orderedByDate
+                )
+            )
+        }
+    }
 }

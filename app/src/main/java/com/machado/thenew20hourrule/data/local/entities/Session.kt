@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
+import java.text.DateFormat
 
 @Entity(
     foreignKeys = [
@@ -21,6 +22,9 @@ data class Session(
     val objective: String,
     val sessionDurationInMin: Double,
     val skillId: Long,
-    val sessionDateTime: String? = null,
+    val createdOnMillis: Long? = null,
     @PrimaryKey(autoGenerate = true) val sessionId: Long? = null
-) : Parcelable
+) : Parcelable {
+    val createdDateFormatted: String
+        get() = DateFormat.getDateTimeInstance().format(createdOnMillis)
+}

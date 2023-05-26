@@ -20,8 +20,10 @@
     <string name="btn_text_stop">Stop</string>
     <string name="btn_text_start">Start</string>
     <string name="tv_no_history_text">No History Recorded, start some sessions</string>
-    <string name="mi_sort_by_duration">Sort by duration</string>
-    <string name="mi_sort_by_time">Sort by time</string>
+    <string name="mi_order_by_duration">Order by Duration   &#8595;</string>
+    <string name="mi_order_by_time">Order by Date Created   &#8595;</string>
+    <string name="mi_order_reverse_by_duration">Order by Duration   &#8593;</string>
+    <string name="mi_order_reverse_by_time">Order by Date Created   &#8593;</string>
     <string name="tv_end_goal">End Goal:</string>
     <string name="tv_start_time">00:00:00</string>
     <string name="btn_text_reset">Reset</string>

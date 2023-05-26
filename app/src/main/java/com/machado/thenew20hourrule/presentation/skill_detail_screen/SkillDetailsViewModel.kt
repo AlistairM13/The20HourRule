@@ -14,7 +14,6 @@ import com.machado.thenew20hourrule.util.TimeHelper.ONE_MINUTE_IN_SECONDS
 import com.machado.thenew20hourrule.util.TimeHelper.ONE_SECOND_IN_MILLIS
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.text.DateFormat
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,12 +38,12 @@ class SkillDetailsViewModel @Inject constructor(
 
     fun setupSession(session: Session) {
         _session.value = session
-        state.set<Session>("session", session)
+        state.set<Session>(SESSION_STATE, session)
     }
 
     init {
-        _session.value = state.get<Session>("session")
-        state.get<Long>("currentTimeMillis")?.let {
+        _session.value = state.get<Session>(SESSION_STATE)
+        state.get<Long>(CURRENT_TIME_STATE)?.let {
             val startedTime = it
             val currentTime = System.currentTimeMillis()
             val differenceInTimeInMinutes =
@@ -80,7 +79,7 @@ class SkillDetailsViewModel @Inject constructor(
 
     private fun startSession() {
         _isSessionStarted.value = true
-        state.set<Long>("currentTimeMillis", System.currentTimeMillis())
+        state.set<Long>(CURRENT_TIME_STATE, System.currentTimeMillis())
         var durationInMs =
             (_session.value!!.sessionDurationInMin * ONE_MINUTE_IN_SECONDS * ONE_SECOND_IN_MILLIS).toLong()
 
@@ -121,12 +120,11 @@ class SkillDetailsViewModel @Inject constructor(
     fun updateSession(skill: Skill) = viewModelScope.launch {
         val timeSpentInMin = _currentTimeInSeconds.value!!.toDouble()
             .div(ONE_MINUTE_IN_SECONDS)
-        val currentDateTime = DateFormat.getDateTimeInstance().format(System.currentTimeMillis())
 
         repository.insertSession(
             session.value!!.copy(
                 sessionDurationInMin = timeSpentInMin,
-                sessionDateTime = currentDateTime
+                createdOnMillis = System.currentTimeMillis()
             )
         )
         repository.updateSkill(
@@ -136,4 +134,8 @@ class SkillDetailsViewModel @Inject constructor(
         )
     }
 
+    companion object {
+        const val SESSION_STATE = "SESSION_STATE"
+        const val CURRENT_TIME_STATE = "CURRENT_TIME_STATE"
+    }
 }

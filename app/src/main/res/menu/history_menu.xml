@@ -4,12 +4,23 @@
 
     <item
         android:id="@+id/miSortByDuration"
-        android:title="@string/mi_sort_by_duration"
+        android:title="@string/mi_order_by_duration"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/miSortByRecent"
-        android:title="@string/mi_sort_by_time"
+        android:id="@+id/miSortByDurationReversed"
+        android:title="@string/mi_order_reverse_by_duration"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/miSortByDate"
+        android:title="@string/mi_order_by_time"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/miSortByDateReversed"
+        android:title="@string/mi_order_reverse_by_time"
+        app:showAsAction="never" />
+
 
 </menu>

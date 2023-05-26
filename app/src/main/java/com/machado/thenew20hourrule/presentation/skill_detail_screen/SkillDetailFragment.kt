@@ -2,7 +2,6 @@ package com.machado.thenew20hourrule.presentation.skill_detail_screen
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -176,11 +175,11 @@ class SkillDetailFragment : Fragment() {
             setTitle("Well Done")
             setCancelable(false)
             setPositiveButton("Save session") { _, _ ->
-                Log.i("MYTAG", "saved")
                 viewModel.updateSession(skill)
                 navigateBackToSkillListScreen()
             }
             if (viewModel.currentTimeInSeconds.value != 0L && viewModel.isSessionFinished.value == false) {
+                setCancelable(true) // If accidentally clicked back when timer is running
                 setTitle("Save your work?")
                 setMessage("Progress will be lost otherwise")
                 setNegativeButton("Exit without saving") { _, _ ->

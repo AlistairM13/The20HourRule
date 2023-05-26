@@ -34,12 +34,14 @@ class SkillListViewModel @Inject constructor(
     var skill: Skill? = null
 
     init {
-        skill = state.get<Skill>("skill")
+        skill = state.get<Skill>(SKILL_STATE)
     }
 
     fun onSkillItemClicked(selectedSkill: Skill) {
-        state.set("skill", selectedSkill)
+        state.set(SKILL_STATE, selectedSkill)
     }
 
-
+    companion object {
+        const val SKILL_STATE = "SKILL_STATE"
+    }
 }

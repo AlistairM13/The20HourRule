@@ -1,8 +1,16 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.TheNew20HourRule" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.TheNew20HourRule" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/blue_900</item>
+        <item name="colorPrimaryVariant">@color/blue_800</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="actionOverflowButtonStyle">@style/CustomOverflowButtonStyle</item>
+    </style>
+
+    <style name="CustomOverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/white</item>
     </style>
 
     <style name="Theme.TheNew20HourRule" parent="Base.Theme.TheNew20HourRule" />

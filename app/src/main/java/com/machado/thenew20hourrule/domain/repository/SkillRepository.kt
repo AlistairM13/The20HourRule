@@ -17,6 +17,6 @@ interface SkillRepository {
 
     suspend fun insertSession(session: Session)
 
-    fun getSkillWithSessions(skillId: Long): LiveData<List<SkillWithSessions>>
+    suspend fun getSkillWithSessions(skillId: Long): SkillWithSessions
 
 }

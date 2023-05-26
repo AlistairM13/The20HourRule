@@ -20,6 +20,6 @@ class SkillRepositoryImpl(
 
     override suspend fun insertSession(session: Session) = dao.insertSession(session)
 
-    override fun getSkillWithSessions(skillId: Long): LiveData<List<SkillWithSessions>> =
+    override suspend fun getSkillWithSessions(skillId: Long): SkillWithSessions =
         dao.getSkillWithSessions(skillId)
 }

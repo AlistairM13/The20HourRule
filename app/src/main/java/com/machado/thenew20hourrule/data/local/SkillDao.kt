@@ -32,6 +32,6 @@ interface SkillDao {
 
     @Transaction
     @Query("SELECT * FROM skill WHERE skillId=:skillId")
-    fun getSkillWithSessions(skillId: Long): LiveData<List<SkillWithSessions>>
+    suspend fun getSkillWithSessions(skillId: Long): SkillWithSessions
 
 }

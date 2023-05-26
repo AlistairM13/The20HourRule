@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -42,12 +41,16 @@ class SkillDetailFragment : Fragment() {
         val args: SkillDetailFragmentArgs by navArgs()
         val skill = args.skill
 
-        binding.toolBar.apply {
+        binding.toolBarSkillDetails.apply {
             title = skill.skillName
             setTitleTextColor(Color.WHITE)
             setOnMenuItemClickListener {
                 if (it.itemId == R.id.miHistory) {
-                    Toast.makeText(context, "View history", Toast.LENGTH_SHORT).show()
+                    val action =
+                        SkillDetailFragmentDirections.actionSkillDetailFragmentToHistoryFragment(
+                            skill
+                        )
+                    findNavController().navigate(action)
                 }
                 true
             }

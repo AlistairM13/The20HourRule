@@ -7,7 +7,7 @@
     tools:context=".presentation.skill_detail_screen.SkillDetailFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolBar"
+        android:id="@+id/toolBarSkillDetails"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolBar"
+        app:layout_constraintTop_toBottomOf="@+id/toolBarSkillDetails"
         tools:text="Session Objective:" />
 
     <TextView
@@ -46,7 +46,7 @@
         android:id="@+id/tvTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00:00:00"
+        android:text="@string/tv_start_time"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Start"
+        android:text="@string/btn_text_start"
         app:layout_constraintEnd_toEndOf="@+id/tvTime"
         app:layout_constraintStart_toStartOf="@+id/tvTime"
         app:layout_constraintTop_toBottomOf="@+id/tvTime" />
@@ -69,7 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Reset"
+        android:text="@string/btn_text_reset"
         app:layout_constraintEnd_toEndOf="@+id/btnStartOrStop"
         app:layout_constraintStart_toStartOf="@+id/btnStartOrStop"
         app:layout_constraintTop_toBottomOf="@+id/btnStartOrStop" />

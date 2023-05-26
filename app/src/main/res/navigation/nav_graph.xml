@@ -25,5 +25,17 @@
         <action
             android:id="@+id/action_skillDetailFragment_to_skillListFragment"
             app:destination="@id/skillListFragment" />
+        <action
+            android:id="@+id/action_skillDetailFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.machado.thenew20hourrule.presentation.history_screen.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history">
+        <argument
+            android:name="skill"
+            app:argType="com.machado.thenew20hourrule.data.local.entities.Skill" />
     </fragment>
 </navigation>
